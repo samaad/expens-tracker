@@ -20,7 +20,7 @@
         </p>
         <div class="hero-actions">
             <a href="{{ url_for('register') }}" class="btn-primary">Create free account</a>
-            <a href="#how-it-works" class="btn-ghost">See how it works</a>
+            <button type="button" class="btn-ghost" id="video-open">See how it works</button>
         </div>
     </div>
 
@@ -102,4 +102,145 @@
     </div>
 </section>
 
+<div class="video-modal" id="video-modal" hidden role="dialog" aria-modal="true" aria-labelledby="video-modal-title">
+    <div class="video-modal-panel" role="document">
+        <div class="video-modal-head">
+            <h2 class="video-modal-title" id="video-modal-title">How Spendly works</h2>
+            <button type="button" class="video-modal-close" id="video-close" aria-label="Close video">&times;</button>
+        </div>
+        <div class="video-modal-frame">
+            <iframe
+                id="video-frame"
+                title="How Spendly works"
+                data-src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0&autoplay=1"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block head %}
+<style>
+    .video-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: rgba(15, 15, 15, 0.6);
+    }
+
+    .video-modal[hidden] { display: none; }
+
+    .video-modal-panel {
+        background: var(--paper-card);
+        border-radius: var(--radius-lg);
+        width: 100%;
+        max-width: 880px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    .video-modal-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.15rem 1.5rem;
+        border-bottom: 1px solid var(--border-soft);
+    }
+
+    .video-modal-title {
+        font-family: var(--font-body);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--ink);
+    }
+
+    .video-modal-close {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1.75rem;
+        line-height: 1;
+        color: var(--ink-muted);
+        padding: 0 0.25rem;
+        transition: color 0.2s;
+    }
+
+    .video-modal-close:hover { color: var(--ink); }
+
+    .video-modal-frame {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #000;
+    }
+
+    .video-modal-frame iframe {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    @media (max-width: 600px) {
+        .video-modal { padding: 1rem; }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+    var modal = document.getElementById('video-modal');
+    var frame = document.getElementById('video-frame');
+    var openBtn = document.getElementById('video-open');
+    var closeBtn = document.getElementById('video-close');
+
+    if (!modal || !frame || !openBtn || !closeBtn) return;
+
+    function openModal() {
+        // Assign src on open so the video only loads when asked for.
+        frame.src = frame.dataset.src;
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
+        closeBtn.focus();
+    }
+
+    function closeModal() {
+        modal.hidden = true;
+        document.body.classList.remove('modal-open');
+        // Pointing the frame at about:blank tears down the player — without
+        // this the audio keeps running after the overlay is hidden.
+        frame.src = 'about:blank';
+        openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+
+    // Backdrop click: only when the press starts and ends on the overlay
+    // itself, so a drag that ends outside the panel doesn't close it.
+    modal.addEventListener('mousedown', function (e) {
+        modal._fromBackdrop = (e.target === modal);
+    });
+
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal && modal._fromBackdrop) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+}());
+</script>
 {% endblock %}

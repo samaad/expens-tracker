@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Spendly{% endblock %}
+
+{% block content %}
+
+<section class="legal-section">
+    <div class="legal-container">
+
+        <div class="legal-header">
+            <h1 class="legal-title">Privacy Policy</h1>
+            <p class="legal-updated">Last updated: 2 August 2026</p>
+        </div>
+
+        <div class="legal-card">
+
+            <p class="legal-intro">
+                This Privacy Policy explains what information Spendly ("Spendly", "the Service",
+                "we", "us") collects when you use our personal expense tracking application, how we
+                use it, and the choices you have. We keep the Service simple, and we aim to keep the
+                data we hold about you just as minimal.
+            </p>
+
+            <div class="legal-block">
+                <h2 class="legal-heading">1. Data We Collect</h2>
+                <p>We collect only what is needed to run the Service for you:</p>
+                <ul>
+                    <li>
+                        <strong>Account information</strong> — the name, email address, and password
+                        you provide when registering. Passwords are stored in hashed form, never as
+                        plain text.
+                    </li>
+                    <li>
+                        <strong>Expense data</strong> — the records you choose to enter, such as
+                        amount, category, date, and description.
+                    </li>
+                    <li>
+                        <strong>Technical information</strong> — basic details generated automatically
+                        when you use the Service, such as session data and error logs, used to keep
+                        the application working correctly.
+                    </li>
+                </ul>
+                <p>
+                    We do not ask for and do not want your bank credentials, card numbers, or any
+                    other payment details. Spendly does not connect to your bank accounts.
+                </p>
+            </div>
+
+            <div class="legal-block">
+                <h2 class="legal-heading">2. How We Use Your Data</h2>
+                <p>Your information is used to:</p>
+                <ul>
+                    <li>Create and secure your account, and keep you signed in.</li>
+                    <li>Store, display, and organise the expenses you record.</li>
+                    <li>Generate the summaries, category breakdowns, and filters shown in the app.</li>
+                    <li>Diagnose faults, prevent abuse, and improve the reliability of the Service.</li>
+                </ul>
+                <p>
+                    We do not sell your personal information. We do not use your expense data for
+                    advertising, and we do not share it with third parties for their own marketing
+                    purposes.
+                </p>
+            </div>
+
+            <div class="legal-block">
+                <h2 class="legal-heading">3. Data Storage</h2>
+                <p>
+                    Your data is stored in our application database and is accessible only through
+                    your own authenticated account. We apply reasonable technical and organisational
+                    measures to protect it against unauthorised access, loss, or disclosure.
+                </p>
+                <p>
+                    We retain your information for as long as your account remains active. If you
+                    delete your account, the associated expense records are removed from the live
+                    Service; residual copies may persist briefly in routine backups before being
+                    overwritten.
+                </p>
+                <p>
+                    No method of transmission or storage is completely secure, so we cannot guarantee
+                    absolute security. We encourage you to use a strong, unique password and to keep
+                    your own copies of any records that matter to you.
+                </p>
+            </div>
+
+            <div class="legal-block">
+                <h2 class="legal-heading">4. Third Party Services</h2>
+                <p>
+                    Spendly relies on a small number of external providers to operate — for example,
+                    hosting and infrastructure providers, and web font delivery for the site's
+                    typography. These providers may process limited technical data, such as your IP
+                    address, purely in order to deliver their part of the Service.
+                </p>
+                <p>
+                    We do not grant third parties access to your expense records for their own
+                    purposes. Any provider we use is expected to handle data in line with applicable
+                    data protection requirements. Links from Spendly to external websites are outside
+                    our control, and their own privacy policies apply once you leave the Service.
+                </p>
+            </div>
+
+            <div class="legal-block">
+                <h2 class="legal-heading">5. Contact Us</h2>
+                <p>
+                    You may request access to, correction of, or deletion of your personal data at any
+                    time. You can also close your account, which removes your records from the live
+                    Service.
+                </p>
+                <p>
+                    If you have questions about this Privacy Policy or about how your data is handled,
+                    please get in touch at <strong>privacy@spendly.example</strong> and we will
+                    respond as soon as we reasonably can.
+                </p>
+                <p>
+                    We may update this Policy from time to time. When we do, we will revise the
+                    "Last updated" date shown at the top of this page.
+                </p>
+            </div>
+
+        </div>
+
+        <p class="legal-footer-note">
+            See also our <a href="{{ url_for('terms') }}">Terms and Conditions</a>
+        </p>
+
+    </div>
+</section>
+
+{% endblock %}
